@@ -34,8 +34,7 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
 ### Processamento de Dados
 
 1. **AWS Lambda**:
-   - Função Lambda criada para popular o Amazon RDS MySQL com dados.
-   - Desencadeada automaticamente para processar e carregar dados novos.
+   - Função Lambda criada para popular o Amazon RDS MySQL com dados, utilizando a biblioteca faker do python para isso.
 
 2. **EC2 e Airbyte**:
    - Instância EC2 provisionada e configurada com o Airbyte.
@@ -49,7 +48,6 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
    - **ACID Transactions**: Garante transações atômicas, consistentes, isoladas e duráveis, evitando problemas comuns de leitura e gravação de dados.
    - **Schema Evolution**: Permite alterações no esquema de dados sem a necessidade de recriar tabelas ou reprocessar os dados existentes.
    - **Time Travel**: Possibilita acessar dados históricos e realizar auditoria de alterações, facilitando a recuperação de versões anteriores dos dados.
-   - **Data Reliability**: Melhora a confiabilidade dos dados através de controles de integridade e mecanismos de checkpointing.
 
 4. **AWS Glue**:
    - Glue Crawler utilizado para catalogar os dados e criar tabelas no Glue Data Catalog.
@@ -84,3 +82,38 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
 ## Conclusão
 
 Esta arquitetura demonstra o uso integrado de várias ferramentas e serviços da AWS para criar uma solução robusta para processamento e análise de dados. A configuração e o fluxo de dados foram projetados para proporcionar um entendimento prático dos serviços e suas interações. O Delta Lake adiciona uma camada de gerenciamento avançado de dados, garantindo maior confiabilidade e flexibilidade no processamento e análise de grandes volumes de dados.
+
+
+
+## Camadas no S3:
+
+![alt text](image.png)
+
+
+## Crawlers:
+
+![alt text](image-1.png)
+
+## Configurações crawler com fonte do tipo delta:
+
+![alt text](image-2.png)
+
+## Databases do data catalog:
+
+![alt text](image-3.png)
+
+## Camada bronze dados brutos no athena:
+
+![alt text](image-4.png)
+
+## Dados refinados na camada silver:
+
+![alt text](image-5.png)
+
+## Dados agregados na gold com base em regras de negócios:
+
+![alt text](image-6.png)
+
+## continuação:
+
+![alt text](image-7.png)
