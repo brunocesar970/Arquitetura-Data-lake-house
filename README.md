@@ -109,11 +109,12 @@ Esta arquitetura demonstra o uso integrado de várias ferramentas e serviços da
 ## Dados refinados na camada silver:
 
 ![alt text](image-5.png)
+![alt text](image-6.png)
 
 ## Dados agregados na gold com base em regras de negócios:
 
-![alt text](image-6.png)
+![alt text](image-8.png)
 
 ## continuação:
 
-![alt text](image-7.png)
+![alt text](image-9.png)
