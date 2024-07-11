@@ -29,6 +29,8 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
 - **Subnets**: Sub-redes para segmentar o tráfego e melhorar a segurança.
 - **Amazon RDS MySQL**: Instância de banco de dados relacional para armazenar os dados iniciais.
 
+**Nota:** O cluster EMR foi provisionado manualmente pelo console da AWS. Os arquivos PySpark necessários para processamento no EMR estão incluídos neste repositório.
+
 ### Processamento de Dados
 
 1. **AWS Lambda**:
@@ -40,11 +42,14 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
    - Airbyte realiza a ingestão dos dados do MySQL para o Amazon S3, transformando-os para o formato Parquet.
 
 3. **PySpark e Delta Lake**:
-   - Código PySpark desenvolvido para processar dados no formato Parquet.
-   - Dados são carregados em três camadas no Amazon S3:
-     - **Camada Bronze**: Dados brutos.
-     - **Camada Silver**: Dados refinados.
-     - **Camada Gold**: Dados agregados e otimizados.
+   - Código PySpark desenvolvido para processar dados no formato Parquet e carregá-los nas camadas Bronze, Silver e Gold no Amazon S3.
+   - **Delta Lake**: Utilizado para gerenciar e otimizar o armazenamento e processamento de dados.
+
+   **Benefícios do Delta Lake**:
+   - **ACID Transactions**: Garante transações atômicas, consistentes, isoladas e duráveis, evitando problemas comuns de leitura e gravação de dados.
+   - **Schema Evolution**: Permite alterações no esquema de dados sem a necessidade de recriar tabelas ou reprocessar os dados existentes.
+   - **Time Travel**: Possibilita acessar dados históricos e realizar auditoria de alterações, facilitando a recuperação de versões anteriores dos dados.
+   - **Data Reliability**: Melhora a confiabilidade dos dados através de controles de integridade e mecanismos de checkpointing.
 
 4. **AWS Glue**:
    - Glue Crawler utilizado para catalogar os dados e criar tabelas no Glue Data Catalog.
@@ -59,17 +64,13 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
 - **CloudWatch**: Monitoramento e logging das atividades na arquitetura.
 - **Slack**: Notificações de erros e alertas de falhas utilizando integração com o CloudWatch.
 
-### Eventos e Notificações
-
-- **S3 Event Notifications**: Configuradas para acionar funções Lambda quando novos dados são carregados na Landing Zone.
-
 ## Instruções para Execução
 
 1. **Provisionar Infraestrutura**:
-   - Execute `terraform apply` para criar os recursos necessários.
+   - Execute `terraform apply` para criar os recursos conforme listado acima.
 
 2. **Configurar Airbyte**:
-   - Inicie a instância EC2 e configure o Airbyte para realizar a ingestão dos dados.
+   - Inicie a instância EC2 e configure o Airbyte para realizar a ingestão dos dados na landing-zone.
 
 3. **Executar Processamento de Dados**:
    - Utilize o PySpark para processar dados e carregá-los nas camadas Bronze, Silver e Gold.
@@ -82,4 +83,4 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
 
 ## Conclusão
 
-Esta arquitetura demonstra o uso integrado de várias ferramentas e serviços da AWS para criar uma solução robusta para processamento e análise de dados. A configuração e o fluxo de dados foram projetados para proporcionar um entendimento prático dos serviços e suas interações.
+Esta arquitetura demonstra o uso integrado de várias ferramentas e serviços da AWS para criar uma solução robusta para processamento e análise de dados. A configuração e o fluxo de dados foram projetados para proporcionar um entendimento prático dos serviços e suas interações. O Delta Lake adiciona uma camada de gerenciamento avançado de dados, garantindo maior confiabilidade e flexibilidade no processamento e análise de grandes volumes de dados.
