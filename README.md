@@ -83,7 +83,9 @@ Utilizei o Terraform para criar e configurar os seguintes recursos:
 
 Esta arquitetura demonstra o uso integrado de várias ferramentas e serviços da AWS para criar uma solução robusta para processamento e análise de dados. A configuração e o fluxo de dados foram projetados para proporcionar um entendimento prático dos serviços e suas interações. O Delta Lake adiciona uma camada de gerenciamento avançado de dados, garantindo maior confiabilidade e flexibilidade no processamento e análise de grandes volumes de dados.
 
+## Airbyte (Extração de dados para a landing-zone)
 
+![alt text](airbyte.jpeg)
 
 ## Camadas no S3:
 
